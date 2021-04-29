@@ -1,4 +1,4 @@
-#Pacotes que ser„o utilizados ----
+#Pacotes que ser√£o utilizados ----
 pacotes = c("tidyr","tidylog", "tidyverse", "janitor", "RODBC",
             "dbplyr")
 
@@ -42,7 +42,7 @@ tabelas <- lapply(con_selec, nome_tab )
 
 
 #1.Receitas ----
-###obs:em 2002 e 2003 temos RecDesp e n„o Receita.3
+###obs:em 2002 e 2003 temos RecDesp e n√£o Receita.3
 receitas <- c()  #lista que vai receber as tabelas de receitas
 
 for (i in 1:13) {
@@ -50,9 +50,9 @@ for (i in 1:13) {
          receitas[[i]] <- sqlFetch(con_selec[[i]], "RecDesp"),
          receitas[[i]] <- sqlFetch(con_selec[[i]], "Receita")
          )
-} #tabelas de receitas. obs:ideal seria mudar nomes das tabelas no access pra padronizar, mas n„o consegui
+} #tabelas de receitas. obs:ideal seria mudar nomes das tabelas no access pra padronizar, mas n√£o consegui
 
-##OBS: Coluna 93 pra frente em 2002 e 2003 s„o despesas, excluir.
+##OBS: Coluna 93 pra frente em 2002 e 2003 s√£o despesas, excluir.
 for (i in 3:4) {
   receitas[[i]] <- receitas[[i]][,1:92]
 }
@@ -90,15 +90,15 @@ for (i in 1:13) {
 } #tabelas de despesas
 
 ##OBSERVACOES:
-#Coluna 92 pra tras em 2002 e 2003 s„o receitas, excluir.----
+#Coluna 92 pra tras em 2002 e 2003 s√£o receitas, excluir.----
 for (i in 3:4) {
   despesas[[i]] <- despesas[[i]][,-(3:92)]
 }
 
-# AtÈ 2003 as despesas empenhadas eram juntas com as despesas por funcao. Ent„o, para separar:
-## 2000 e 2001 coluna 31 pra frente È Despesa por funcao
-## 2002 coluna 76 pra frente È Despesa por funcao
-## 2003 coluna 75 pra frente È Despesa por funcao
+# At√© 2003 as despesas empenhadas eram juntas com as despesas por funcao. Ent√£o, para separar:
+## 2000 e 2001 coluna 31 pra frente √© Despesa por funcao
+## 2002 coluna 76 pra frente √© Despesa por funcao
+## 2003 coluna 75 pra frente √© Despesa por funcao
 for (i in 1:2) {
   despesas[[i]] <- despesas[[i]][,(1:30)]
 }
@@ -144,15 +144,15 @@ for (i in 1:13) {
 }
 
 ##OBSERVACOES:
-#Coluna 92 pra tras em 2002 e 2003 s„o receitas, excluir.----
+#Coluna 92 pra tras em 2002 e 2003 s√£o receitas, excluir.----
 for (i in 3:4) {
   despesas_funcao[[i]] <- despesas_funcao[[i]][,-(3:92)]
 }
 
-# AtÈ 2003 as despesas empenhadas eram juntas com as despesas por funcao. Ent„o, para separar:
-## 2000 e 2001 coluna 31 pra frente È Despesa por funcao
-## 2002 coluna 76 pra frente È Despesa por funcao
-## 2003 coluna 75 pra frente È Despesa por funcao
+# At√© 2003 as despesas empenhadas eram juntas com as despesas por funcao. Ent√£o, para separar:
+## 2000 e 2001 coluna 31 pra frente √© Despesa por funcao
+## 2002 coluna 76 pra frente √© Despesa por funcao
+## 2003 coluna 75 pra frente √© Despesa por funcao
 for (i in 1:2) {
   despesas_funcao[[i]] <- despesas_funcao[[i]][,-(3:30)]
 }
@@ -184,6 +184,8 @@ despesas_funcao <- bind_rows(despesas_funcao)
 
 #Salvar
 save(despesas_funcao, file = "despesa_funcao_municipal_2000-2012.Rda")
+
+#OBS: Para 2010, a despesa por funcao trouxe valores para as colunas. Corrigir.
 
 
 
